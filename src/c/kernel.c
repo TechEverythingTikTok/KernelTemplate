@@ -2,6 +2,7 @@
 // 32 bit
 
 #include <stdint.h>
+#include <stdbool.h>
 #include "panic.h"
 #include "Multiboot/tags.h"
 #include "Multiboot/initalltags.h"
@@ -34,5 +35,9 @@ void kmain(uint32_t mb2_ident, uint32_t mb2_addr) {
     ) {
         // loop through each tag
         mb2_tag_init(tag);
+    }
+
+    while (true) {
+        __asm__ volatile("hlt")
     }
 }
