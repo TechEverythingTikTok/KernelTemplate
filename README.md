@@ -43,12 +43,8 @@ Makefile
 > Convenience script. I strongly recommend you use Makefile / CMake during your development process of this OS or any of your projects
 
 Required tools:
-> make
-> 
-> gcc
-> 
-> ld (comes with gcc)
-> 
-> nasm
-> 
-> grub
+> - make
+> - gcc
+> - ld (comes with gcc)
+> - nasm
+> - grub
