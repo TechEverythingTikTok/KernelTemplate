@@ -38,6 +38,6 @@ void kmain(uint32_t mb2_ident, uint32_t mb2_addr) {
     }
 
     while (true) {
-        __asm__ volatile("hlt")
+        __asm__ volatile("hlt");
     }
 }
