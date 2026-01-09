@@ -42,3 +42,4 @@ Required tools:
 > - ld (comes with gcc)
 > - nasm
 > - grub
+I recommend you have an emulator like qemu and run this with qemu-system-i386
