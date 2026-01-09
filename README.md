@@ -8,14 +8,20 @@ I strongly recommend reading the Multiboot2 spec to understand what you are doin
 
 multiboot.asm
 > Multiboot2 compliant header, 8 byte aligned, contains:
+
 > Magic Number
+
 > Protected Mode Code
+
 > Header Length
+
 > Checksum
+
 > Tags
 
 boot.asm
 > Sets up the stack, pushes the Multiboot2 values to the stack, and calls kmain
+
 > Halts the CPU if control is returned
 
 panic.h / panic.c
@@ -38,7 +44,11 @@ Makefile
 
 Required tools:
 > make
+
 > gcc
+
 > ld (comes with gcc)
+
 > nasm
+
 > grub
