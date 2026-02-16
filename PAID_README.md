@@ -1,68 +1,98 @@
-##### This is a basic Multiboot2-compliant bootable kernel (32-bit mode)
+##### Multiboot2-Compliant Bootable Kernel (32-bit)
 
-It's not even close to being a complete OS; you create your own OS from here.
-This is just a starter template to save you some time and get you going.
-I strongly recommend reading the Multiboot2 spec to understand what you are doing.
+This is a minimal Multiboot2-compliant 32-bit kernel template designed to give you a clean starting point for OS development.
 
-###### https://www.gnu.org/software/grub/manual/multiboot2/multiboot.html
+It is not a complete operating system.
+It provides the fundamental bootstrapping and early initialization required to begin building your own OS.
 
-multiboot.asm
-> - Multiboot2 compliant header, 8 byte aligned, contains:
-> - Magic Number
-> - Protected Mode Code
-> - Header Length
-> - Checksum
-> - Tags
+You are strongly encouraged to read the Multiboot2 specification to fully understand the boot process and the structures being used:
 
-boot.asm
-> - Sets up the stack, pushes the Multiboot2 values to the stack, and calls kmain
-> - Halts the CPU if control is returned
+https://www.gnu.org/software/grub/manual/multiboot2/multiboot.html
 
-gdt.asm / gdt.c
-> - Handles initialization of GDT (Global Descriptor Table)
+Project Structure:
 
-isr.asm
-> - Handles the ISR stubs (you can add more functions from 47 on; software interrupts)
+> multiboot.asm
+8-byte aligned Multiboot2 header
+Includes:
+- Magic number
+- Header length
+- Checksum
+- Required tags
+- Protected mode entry code
 
-idt.c
-> - Handles initialization of IDT (Interrupt Descriptor Table)
+> boot.asm
+- Sets up the stack
+- Pushes Multiboot2-provided values
+- Transfers control to kmain()
+- Halts the CPU if execution returns
 
-pic.c / pic.h
-> - Handles PIC remapping, IRQ mask clearing and unclearing, and PIC EOI
+> gdt.asm / gdt.c
+- Initializes the Global Descriptor Table (GDT)
 
-isr.c
-> - Common isr C handler
-> - !! THIS FILE IS JUST A TEMPLATE; YOU WILL COMPLETE THIS WITH YOUR OWN FUNCTIONS AND METHODS !!
+> idt.c
+- Initializes the Interrupt Descriptor Table (IDT)
 
-panic.h / panic.c
-> - Responsible for panic handling. Manually called for now. Just disable interrupts and halt
+> isr.asm
+- Defines ISR stubs
+- Software interrupts available starting from vector 47
 
-initalltags.h / initalltags.c / tags.h
-> - Responsible for tag initialization and accessing later when needed
+> isr.c
+- Common C-level ISR handler
+- This file is intentionally minimal — extend it with your own handlers and logic
 
-io.h
-> - inb(), outb() and io_wait() functions
+> pic.c / pic.h
+- PIC remapping
+- IRQ mask control
+- End-of-interrupt (EOI) handling
 
-stdio.c / stdio.h
-> - debug_out() function to output string to COM1 serial
+> panic.c / panic.h
+- Basic panic handler
+- Disables interrupts and halts execution (Currently manually triggered)
 
-kernel.c
-> - Responsible for being called, getting arguments, handling initializer function calls, and more later
+> initalltags.c / initalltags.h / tags.h
+- Multiboot2 tag parsing and storage
+- Provides access to bootloader-provided information
 
-grub.cfg
-> - Configuration for GRUB. You can tweak some values here. Not much flexibility
+> io.h
+- inb(), outb(), and io_wait() port I/O functions
 
-linker.ld
-> - Script for the ld command to handle proper linking between files
+> stdio.c / stdio.h
+- debug_out() function
+- Serial output via COM1 (useful for debugging)
 
-Makefile
-> - Convenience script. I strongly recommend you use Makefile / CMake during your development process of this OS or any of your projects
+> kernel.c
+- Kernel entry logic (kmain)
+- Argument handling
+- Responsible for initialization flow
+- Designed to be extended
 
-Required tools:
-> - make
-> - gcc
-> - ld (comes with gcc)
-> - nasm
-> - grub
+> grub.cfg
+- GRUB configuration file
+- Minimal configuration for booting the kernel
 
-I recommend you have an emulator like qemu and run this with qemu-system-i386
+> linker.ld
+- Linker script
+- Ensures correct memory layout and section placement
+
+> Makefile
+- Build automation
+- Highly recommended for structured OS development workflows
+
+>> Required Tools
+- make
+- gcc
+- ld (included with GCC)
+- nasm
+- grub
+- xorriso required for grub-mkrescue
+
+Use an emulator such as qemu-system-i386
+
+> This template exists to remove the repetitive setup phase of OS development and allow you to focus on implementing:
+- Memory management
+- Scheduling
+- Filesystems
+- Drivers
+- System calls
+
+It provides a clean, understandable base — nothing more.
