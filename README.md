@@ -57,7 +57,7 @@ docker build dockerenv -t kernel-buildenv
 
 
 ### Required tools
-> - make - use Makefile to automatically run compile command (not needed, but HEAVILY recommended for organizing.)
+> - make - use Makefile to automatically run compile commands (not needed, but HEAVILY recommended for organizing.)
 > - gcc - compile .c files
 > - ld (comes with gcc) - link files to make them work
 > - nasm - Make .asm files into .o
